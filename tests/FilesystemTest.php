@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Filesystem;
 
 class FilesystemTest extends PHPUnit_Framework_TestCase {
 

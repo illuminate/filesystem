@@ -1,4 +1,4 @@
-<?php namespace Illuminate\Filesystem;
+<?php namespace Illuminate;
 
 class FileNotFoundException extends \Exception {}
 
