@@ -1,5 +1,5 @@
-# Illuminate Container
+# Illuminate Filesystem
 
-A powerful IoC container for PHP.
+A filesystem abstraction library.
 
-[![Build Status](https://secure.travis-ci.org/illuminate/container.png)](http://travis-ci.org/illuminate/container)
+[![Build Status](https://secure.travis-ci.org/illuminate/filesystem.png)](http://travis-ci.org/illuminate/filesystem)
