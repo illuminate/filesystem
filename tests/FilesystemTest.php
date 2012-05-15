@@ -31,4 +31,27 @@ class FilesystemTest extends PHPUnit_Framework_TestCase {
 		@unlink(__DIR__.'/file.txt');
 	}
 
+
+	public function testDeleteDirectory()
+	{
+		mkdir(__DIR__.'/foo');
+		file_put_contents(__DIR__.'/foo/file.txt', 'Hello World');
+		$files = new Filesystem;
+		$files->deleteDirectory(__DIR__.'/foo');
+		$this->assertFalse(is_dir(__DIR__.'/foo'));
+		$this->assertFalse(file_exists(__DIR__.'/foo/file.txt'));
+	}
+
+
+	public function testCleanDirectory()
+	{
+		mkdir(__DIR__.'/foo');
+		file_put_contents(__DIR__.'/foo/file.txt', 'Hello World');
+		$files = new Filesystem;
+		$files->cleanDirectory(__DIR__.'/foo');
+		$this->assertTrue(is_dir(__DIR__.'/foo'));
+		$this->assertFalse(file_exists(__DIR__.'/foo/file.txt'));
+		@rmdir(__DIR__.'/foo');
+	}
+
 }
