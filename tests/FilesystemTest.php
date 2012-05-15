@@ -21,4 +21,14 @@ class FilesystemTest extends PHPUnit_Framework_TestCase {
 		@unlink(__DIR__.'/file.txt');
 	}
 
+
+	public function testDeleteRemovesFiles()
+	{
+		file_put_contents(__DIR__.'/file.txt', 'Hello World');
+		$files = new Filesystem;
+		$files->delete(__DIR__.'/file.txt');
+		$this->assertFalse(file_exists(__DIR__.'/file.txt'));
+		@unlink(__DIR__.'/file.txt');
+	}
+
 }

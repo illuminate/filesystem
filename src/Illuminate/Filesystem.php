@@ -29,4 +29,15 @@ class Filesystem {
 		return file_put_contents($path, $contents, LOCK_EX);
 	}
 
+	/**
+	 * Delete the file at a given path.
+	 *
+	 * @param  string  $path
+	 * @return bool
+	 */
+	public function delete($path)
+	{
+		return unlink($path);
+	}
+
 }
