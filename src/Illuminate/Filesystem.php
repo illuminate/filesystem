@@ -126,7 +126,7 @@ class Filesystem {
 	 * @param  string  $path
 	 * @return int
 	 */
-	public function modified($path)
+	public function lastModified($path)
 	{
 		return filemtime($path);
 	}
