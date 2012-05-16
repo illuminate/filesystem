@@ -143,6 +143,27 @@ class Filesystem {
 	}
 
 	/**
+	 * Get an array of all files in a directory.
+	 *
+	 * @param  string  $directory
+	 * @return array
+	 */
+	public function files($directory)
+	{
+		$glob = glob($directory.'/*');
+
+		if ($glob === false) return array();
+
+		// To get the appropriate files, we'll simply glob the direectory and filter
+		// out any "files" that are not truly files so we do not end up with any
+		// directories in our list, but only true files within the directory.
+		return array_filter($glob, function($file)
+		{
+			return filetype($file) == 'file';
+		});
+	}
+
+	/**
 	 * Recursively delete a directory.
 	 *
 	 * The directory itself may be optionally preserved.

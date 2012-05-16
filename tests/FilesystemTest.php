@@ -54,4 +54,20 @@ class FilesystemTest extends PHPUnit_Framework_TestCase {
 		@rmdir(__DIR__.'/foo');
 	}
 
+
+	public function testFilesMethod()
+	{
+		mkdir(__DIR__.'/foo');
+		file_put_contents(__DIR__.'/foo/1.txt', '1');
+		file_put_contents(__DIR__.'/foo/2.txt', '2');
+		mkdir(__DIR__.'/foo/bar');
+		$files = new Filesystem;
+		$this->assertEquals(array(__DIR__.'/foo/1.txt', __DIR__.'/foo/2.txt'), $files->files(__DIR__.'/foo'));
+		unset($files);
+		@unlink(__DIR__.'/foo/1.txt');
+		@unlink(__DIR__.'/foo/2.txt');
+		@rmdir(__DIR__.'/foo/bar');
+		@rmdir(__DIR__.'/foo');
+	}
+
 }
