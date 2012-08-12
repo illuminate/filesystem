@@ -29,6 +29,19 @@ class Filesystem {
 	}
 
 	/**
+	 * Get the returned value of a file.
+	 *
+	 * @param  string  $path
+	 * @return mixed
+	 */
+	public function getRequire($path)
+	{
+		if (file_exists($path)) return require $path;
+
+		throw new FileNotFoundException("File does not exist at path {$path}");
+	}
+
+	/**
 	 * Write the contents of a file.
 	 *
 	 * @param  string  $path
