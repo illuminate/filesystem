@@ -143,6 +143,18 @@ class Filesystem {
 	}
 
 	/**
+	 * Find path names matching a given pattern.
+	 *
+	 * @param  string  $pattern
+	 * @param  int     $flags
+	 * @return array
+	 */
+	public function glob($pattern, $flags = 0)
+	{
+		return glob($pattern, $flags);
+	}
+
+	/**
 	 * Get an array of all files in a directory.
 	 *
 	 * @param  string  $directory
