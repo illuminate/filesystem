@@ -42,6 +42,17 @@ class Filesystem {
 	}
 
 	/**
+	 * Require the given file once.
+	 *
+	 * @param  string  $file
+	 * @return void
+	 */
+	public function requireOnce($file)
+	{
+		require_once $file;
+	}
+
+	/**
 	 * Write the contents of a file.
 	 *
 	 * @param  string  $path
