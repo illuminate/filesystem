@@ -70,4 +70,41 @@ class FilesystemTest extends PHPUnit_Framework_TestCase {
 		@rmdir(__DIR__.'/foo');
 	}
 
+
+	public function testCopyDirectoryReturnsFalseIfSourceIsntDirectory()
+	{
+		$files = new Filesystem;
+		$this->assertFalse($files->copyDirectory(__DIR__.'/foo/bar/baz/breeze/boom', __DIR__));
+	}
+
+
+	public function testCopyDirectoryMovesEntireDirectory()
+	{
+		mkdir(__DIR__.'/tmp', 0777, true);
+		file_put_contents(__DIR__.'/tmp/foo.txt', '');
+		file_put_contents(__DIR__.'/tmp/bar.txt', '');
+		mkdir(__DIR__.'/tmp/nested', 0777, true);
+		file_put_contents(__DIR__.'/tmp/nested/baz.txt', '');
+
+		$files = new Filesystem;
+		$files->copyDirectory(__DIR__.'/tmp', __DIR__.'/tmp2');
+		$this->assertTrue(is_dir(__DIR__.'/tmp2'));
+		$this->assertTrue(file_exists(__DIR__.'/tmp2/foo.txt'));
+		$this->assertTrue(file_exists(__DIR__.'/tmp2/bar.txt'));
+		$this->assertTrue(is_dir(__DIR__.'/tmp2/nested'));
+		$this->assertTrue(file_exists(__DIR__.'/tmp2/nested/baz.txt'));
+
+		unlink(__DIR__.'/tmp/nested/baz.txt');
+		rmdir(__DIR__.'/tmp/nested');
+		unlink(__DIR__.'/tmp/bar.txt');
+		unlink(__DIR__.'/tmp/foo.txt');
+		rmdir(__DIR__.'/tmp');
+
+		unlink(__DIR__.'/tmp2/nested/baz.txt');
+		rmdir(__DIR__.'/tmp2/nested');
+		unlink(__DIR__.'/tmp2/foo.txt');
+		unlink(__DIR__.'/tmp2/bar.txt');
+		rmdir(__DIR__.'/tmp2');
+	}
+
 }
