@@ -31,6 +31,17 @@ class Filesystem {
 	}
 
 	/**
+	 * Get the contents of a remote file.
+	 *
+	 * @param  string  $path
+	 * @return string
+	 */
+	public function getRemote($path)
+	{
+		return file_get_contents($path);
+	}
+
+	/**
 	 * Get the returned value of a file.
 	 *
 	 * @param  string  $path
