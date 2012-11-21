@@ -12,6 +12,6 @@
         "illuminate/support": ">=1.0.0"
     },
     "autoload": {
-        "classmap": ["src/Illuminate/Filesystem.php"]
+        "classmap": ["src"]
     }
 }
