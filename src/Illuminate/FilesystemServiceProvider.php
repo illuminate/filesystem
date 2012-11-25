@@ -7,12 +7,11 @@ class FilesystemServiceProvider extends ServiceProvider {
 	/**
 	 * Register the service provider.
 	 *
-	 * @param  Illuminate\Foundation\Application  $app
 	 * @return void
 	 */
-	public function register($app)
+	public function register()
 	{
-		$app['files'] = $app->share(function() { return new Filesystem; });
+		$this->app['files'] = $this->app->share(function() { return new Filesystem; });
 	}
 
 }
