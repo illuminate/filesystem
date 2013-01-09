@@ -197,9 +197,9 @@ class Filesystem {
 	 * @param  string  $directory
 	 * @return array
 	 */
-	public function files($directory)
+	public function files($directory, $extension = null)
 	{
-		$glob = glob($directory.'/*');
+		$glob = glob($directory.'/*' . ($extension ? ".".$extension : '') );
 
 		if ($glob === false) return array();
 
