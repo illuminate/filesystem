@@ -25,7 +25,7 @@ class Filesystem {
 	 */
 	public function get($path)
 	{
-		if (file_exists($path)) return file_get_contents($path);
+		if ($this->exists($path)) return file_get_contents($path);
 
 		throw new FileNotFoundException("File does not exist at path {$path}");
 	}
@@ -49,7 +49,7 @@ class Filesystem {
 	 */
 	public function getRequire($path)
 	{
-		if (file_exists($path)) return require $path;
+		if ($this->exists($path)) return require $path;
 
 		throw new FileNotFoundException("File does not exist at path {$path}");
 	}
