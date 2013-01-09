@@ -199,7 +199,7 @@ class Filesystem {
 	 */
 	public function files($directory)
 	{
-		$glob = glob($directory.'/*');
+		$glob = $this->glob($directory.'/*');
 
 		if ($glob === false) return array();
 
@@ -208,7 +208,7 @@ class Filesystem {
 		// directories in our list, but only true files within the directory.
 		return array_filter($glob, function($file)
 		{
-			return filetype($file) == 'file';
+			return $this->type($file) == 'file';
 		});
 	}
 
@@ -288,7 +288,7 @@ class Filesystem {
 	{
 		if ( ! $this->isDirectory($directory)) return;
 
-		$items = new \FilesystemIterator($directory);
+		$items = new FilesystemIterator($directory);
 
 		foreach ($items as $item)
 		{
