@@ -199,16 +199,18 @@ class Filesystem {
 	 */
 	public function files($directory)
 	{
-		$glob = glob($directory.'/*');
+		$glob = $this->glob($directory.'/*');
 
 		if ($glob === false) return array();
+		
+		$me = $this;
 
-		// To get the appropriate files, we'll simply glob the direectory and filter
+		// To get the appropriate files, we'll simply glob the directory and filter
 		// out any "files" that are not truly files so we do not end up with any
 		// directories in our list, but only true files within the directory.
-		return array_filter($glob, function($file)
+		return array_filter($glob, function($file) use ($me)
 		{
-			return filetype($file) == 'file';
+			return $me->type($file) == 'file';
 		});
 	}
 
@@ -288,7 +290,7 @@ class Filesystem {
 	{
 		if ( ! $this->isDirectory($directory)) return;
 
-		$items = new \FilesystemIterator($directory);
+		$items = new FilesystemIterator($directory);
 
 		foreach ($items as $item)
 		{
