@@ -202,13 +202,15 @@ class Filesystem {
 		$glob = $this->glob($directory.'/*');
 
 		if ($glob === false) return array();
+		
+		$filesystem = $this;
 
-		// To get the appropriate files, we'll simply glob the direectory and filter
+		// To get the appropriate files, we'll simply glob the directory and filter
 		// out any "files" that are not truly files so we do not end up with any
 		// directories in our list, but only true files within the directory.
-		return array_filter($glob, function($file) use ($this)
+		return array_filter($glob, function($file) use ($filesystem)
 		{
-			return $this->type($file) == 'file';
+			return $filesystem->type($file) == 'file';
 		});
 	}
 
