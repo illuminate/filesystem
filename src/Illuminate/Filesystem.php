@@ -203,14 +203,14 @@ class Filesystem {
 
 		if ($glob === false) return array();
 		
-		$filesystem = $this;
+		$me = $this;
 
 		// To get the appropriate files, we'll simply glob the directory and filter
 		// out any "files" that are not truly files so we do not end up with any
 		// directories in our list, but only true files within the directory.
-		return array_filter($glob, function($file) use ($filesystem)
+		return array_filter($glob, function($file) use ($me)
 		{
-			return $filesystem->type($file) == 'file';
+			return $me->type($file) == 'file';
 		});
 	}
 
