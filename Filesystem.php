@@ -210,6 +210,17 @@ class Filesystem {
 	}
 
 	/**
+	 * Determine if the given path is readable.
+	 *
+	 * @param  string  $path
+	 * @return bool
+	 */
+	public function isReadable($path)
+	{
+		return is_readable($path);
+	}
+
+	/**
 	 * Determine if the given path is a file.
 	 *
 	 * @param  string  $file
