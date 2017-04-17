@@ -374,16 +374,16 @@ class Filesystem
      */
     public function files($directory)
     {
-        $glob = glob($directory.'/*');
+        $allFiles = $this->allFiles($directory);
 
-        if ($glob === false) {
+        if (empty($allFiles)) {
             return [];
         }
 
-        // To get the appropriate files, we'll simply glob the directory and filter
+        // To get the appropriate files, we'll simply grab the directory and filter
         // out any "files" that are not truly files so we do not end up with any
         // directories in our list, but only true files within the directory.
-        return array_filter($glob, function ($file) {
+        return array_filter($allFiles, function ($file) {
             return filetype($file) == 'file';
         });
     }
