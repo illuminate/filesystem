@@ -2,7 +2,9 @@
 
 namespace Illuminate\Filesystem;
 
+use Error;
 use RuntimeException;
+use BadMethodCallException;
 use Illuminate\Http\File;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -324,6 +326,12 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      */
     public function url($path)
     {
+        try {
+            return $this->driver->getUrl($path);
+        } catch (BadMethodCallException $exception) {
+        } catch (Error $exception) {
+        }
+
         $adapter = $this->driver->getAdapter();
 
         if (method_exists($adapter, 'getUrl')) {
@@ -390,6 +398,12 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      */
     public function temporaryUrl($path, $expiration, array $options = [])
     {
+        try {
+            return $this->driver->getTemporaryUrl($path, $expiration, $options);
+        } catch (BadMethodCallException $exception) {
+        } catch (Error $exception) {
+        }
+
         $adapter = $this->driver->getAdapter();
 
         if (method_exists($adapter, 'getTemporaryUrl')) {
